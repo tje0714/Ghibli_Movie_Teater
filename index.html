@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎬 지브리 영화관 - 메인</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="icon" type="image/png" href="../img/logo.png" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="logo">🎬 지브리 영화관</div>
+      <ul class="nav-menu">
+        <li><a href="#home">홈</a></li>
+        <li><a href="#movies">영화</a></li>
+        <li><a href="#about">소개</a></li>
+      </ul>
+      <div class="nav-right">
+        <span class="user-info" style="display: none"></span>
+        <button class="login-btn" id="openLoginPopup">로그인</button>
+        <button class="login-btn" id="moveRegister">회원가입</button>
+        <button class="logout-btn" style="display: none" id="logout">
+          로그아웃
+        </button>
+      </div>
+    </nav>
+
+    <div class="mian-container">
+      <div class="header">
+        <h1>스튜디오 지브리 영화 컬렉션</h1>
+        <p>마법 같은 지브리 세상에 오신 것을 환영합니다</p>
+      </div>
+
+      <div class="loading">영화 정보를 가져오는 중...</div>
+      <div class="movies"></div>
+    </div>
+    <script src="js/index.js"></script>
+  </body>
+</html>

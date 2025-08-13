@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎬 지브리 영화관 - 회원가입</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../css/register.css" />
+    <link rel="icon" type="image/png" href="../img/logo.png" />
+  </head>
+  <body>
+    <a href="../index.html" class="back-link">← 메인으로 돌아가기</a>
+
+    <div class="signup-container">
+      <div class="logo">🎬 지브리 영화관</div>
+      <p class="subtitle">새로운 계정 만들기</p>
+
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <div class="form">
+        <input type="text" id="username" placeholder="사용자명" required />
+        <input type="email" id="email" placeholder="이메일 주소" required />
+        <input type="password" id="password" placeholder="비밀번호" required />
+        <div class="password-strength" id="passwordStrength"></div>
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="비밀번호 확인"
+          required
+        />
+
+        <button class="signup-btn" id="signup">회원가입</button>
+
+        <div class="divider">
+          <span>또는</span>
+        </div>
+
+        <button class="login-btn" id="goToLogin">이미 계정이 있어요</button>
+      </div>
+    </div>
+    <script src="../js/register.js"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎬 지브리 영화관 - 로그인</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="icon" type="image/png" href="../img/logo.png" />
+  </head>
+  <body>
+    <div class="login-container">
+      <button class="close-btn" onclick="closePopup()">&times;</button>
+
+      <div class="logo">🎬 지브리 영화관</div>
+      <p class="subtitle">로그인하세요</p>
+
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <div class="form">
+        <input type="text" id="username" placeholder="사용자명" required />
+        <input type="password" id="password" placeholder="비밀번호" required />
+
+        <div class="remember-me">
+          <input type="checkbox" id="rememberMe" />
+          <label for="rememberMe">로그인 상태 유지</label>
+        </div>
+
+        <button class="login-btn" id="login">로그인</button>
+
+        <div class="divider">
+          <span>또는</span>
+        </div>
+
+        <button class="signup-btn" id="goToSignup">회원가입</button>
+      </div>
+    </div>
+    <script src="../js/login.js"></script>
+  </body>
+</html>
