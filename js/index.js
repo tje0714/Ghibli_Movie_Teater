@@ -1,69 +1,69 @@
-$(function () {
-  loadMovies();
-  $("#openLoginPopup").click(openLoginPopup);
-  $("#moveRegister").click(goToSignup);
+// js/index.js
+
+$(document).ready(function () {
+  const GhibliAPI = "https://ghibliapi.vercel.app/films";
+  const moviesContainer = $(".movies");
+  const loading = $(".loading");
+
+  // 1. 영화 정보 API로 가져오기
+  $.ajax({
+    url: GhibliAPI,
+    method: "GET",
+    success: function (movies) {
+      loading.hide();
+      movies.forEach(function (movie) {
+        const movieCard = `
+          <div class="movie">
+            <h3>${movie.title}</h3>
+            <p><strong>Original Title:</strong> ${movie.original_title}</p>
+            <p><strong>Director:</strong> ${movie.director}</p>
+            <p><strong>Release Year:</strong> <span class="year">${
+              movie.release_date
+            }</span></p>
+            <p>${movie.description.substring(0, 100)}...</p>
+            <a href="html/detail.html?id=${
+              movie.id
+            }" class="detail-link">자세히 보기</a>
+          </div>
+        `;
+        moviesContainer.append(movieCard);
+      });
+    },
+    error: function () {
+      loading.text("영화를 불러오는 데 실패했습니다.");
+    },
+  });
+
+  // 2. 로그인 상태 확인 및 UI 업데이트
+  const loggedInUser =
+    JSON.parse(sessionStorage.getItem("loggedInUser")) ||
+    JSON.parse(localStorage.getItem("rememberedUser"));
+
+  if (loggedInUser) {
+    updateUIAfterLogin(loggedInUser.username);
+  }
+
+  // 3. 이벤트 핸들러 설정
+  $("#openLoginPopup").click(function () {
+    // 로그인 창을 팝업으로 띄우기
+    window.open("html/login.html", "loginPopup", "width=500,height=700");
+  });
+
+  $("#moveRegister").click(function () {
+    window.location.href = "html/register.html";
+  });
+
+  $("#logout").click(function () {
+    sessionStorage.removeItem("loggedInUser");
+    localStorage.removeItem("rememberedUser");
+    alert("로그아웃 되었습니다.");
+    window.location.reload();
+  });
 });
 
-function loadMovies() {
-  $.get("https://ghibliapi.vercel.app/films")
-    .done(function (data) {
-      // .loading .hide()
-      $(".loading").hide();
-      displayMovies(data);
-    })
-    .fail(function () {});
-}
-
-function displayMovies(movies) {
-  // movies.map(movie)
-  const movieCard = movies
-    .map(
-      (movie) =>
-        `
-                    <div class="movie">
-                        <h3>${movie.title}</h3>
-                        <p class="year">개봉년도: ${movie.release_date}</p>
-                        <p><strong>감독:</strong> ${movie.director}</p>
-                        <p><strong>제작자:</strong> ${movie.producer}</p>
-                        <p>
-                        <span class="detail-link" onclick="goToDetail('${
-                          movie.id
-                        }')"  >
-                            ${
-                              movie.description.substring(0, 50) + "...상세보기"
-                            }
-                        </span>
-                        </p>
-                        <img src="${movie.image}" style="max-width:100%">
-                    </div>
-                `
-    )
-    .join("");
-  $(".movies").html(movieCard);
-}
-
-// 상세페이지 이동
-/*
-    우리반에서 개발을 진행하기 위해 index.html 화면을 보여주는 주소
-    http://127.0.0.1:5500/index.html   ?key=value
-    ? 뒤는 매개변수로 전달받은 값을 detail.html 에 전달하겠다
-    
-    detail.html 로 들어가면 -> 상세페이지에서 표시할 내용이 존재하지 않습니다.
-
-    detail.html?id=id에해당하는 값 을 작성하면 
-    해당 데이터를 detail에서 불러올 수 있음
-    
-    */
-function goToDetail(movieId) {
-  window.location.href = `html/detail.html?id=${movieId}`;
-}
-
-// 로그인 팝업 열기
-function openLoginPopup() {
-  window.open("html/login.html", "_blank", "width=450,height=600");
-}
-
-// 회원가입 페이지로 이동
-function goToSignup() {
-  window.location.href = "html/register.html";
+// 로그인 성공 시 UI 변경 함수
+function updateUIAfterLogin(username) {
+  $(".user-info").text(`${username}님, 환영합니다!`).show();
+  $("#openLoginPopup, #moveRegister").hide();
+  $("#logout").show();
 }
